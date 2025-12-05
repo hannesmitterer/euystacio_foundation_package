@@ -23,9 +23,19 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Configuration variables - modify these as needed
-REMOTE_REPO_URL="https://github.com/hannesmitterer/euystacio_foundation_package.git"
+# REMOTE_REPO_URL can be set via environment variable or as the first command-line argument.
+DEFAULT_REMOTE_REPO_URL="https://github.com/hannesmitterer/euystacio_foundation_package.git"
+REMOTE_REPO_URL="${REMOTE_REPO_URL:-${1:-$DEFAULT_REMOTE_REPO_URL}}"
 COMMIT_MESSAGE="Initial commit: Euystacio Foundation & Sentimento Codex package"
 BRANCH_NAME="main"
+
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+    echo -e "${YELLOW}Usage:${NC} $0 [REMOTE_REPO_URL]"
+    echo "You can also set the REMOTE_REPO_URL environment variable."
+    echo "If neither is provided, the default is:"
+    echo "  $DEFAULT_REMOTE_REPO_URL"
+    exit 0
+fi
 
 echo -e "${BLUE}🚀 Starting Git Repository Initialization for Euystacio Foundation & Sentimento Codex${NC}"
 echo "============================================================================="
@@ -47,15 +57,17 @@ fi
 
 # Configure Git user if not already configured
 echo -e "${YELLOW}Step 2.1: Configuring Git user (if needed)${NC}"
+GIT_USER_NAME="${GIT_USER_NAME:-Euystacio Foundation}"
+GIT_USER_EMAIL="${GIT_USER_EMAIL:-foundation@euystacio.org}"
 if ! git config user.name >/dev/null 2>&1; then
-    git config user.name "Euystacio Foundation"
-    echo "✓ Git user name configured: Euystacio Foundation"
+    git config user.name "$GIT_USER_NAME"
+    echo "✓ Git user name configured: $GIT_USER_NAME"
 else
     echo "✓ Git user name already configured: $(git config user.name)"
 fi
 if ! git config user.email >/dev/null 2>&1; then
-    git config user.email "foundation@euystacio.org"
-    echo "✓ Git user email configured: foundation@euystacio.org"
+    git config user.email "$GIT_USER_EMAIL"
+    echo "✓ Git user email configured: $GIT_USER_EMAIL"
 else
     echo "✓ Git user email already configured: $(git config user.email)"
 fi
@@ -111,12 +123,15 @@ echo -e "${YELLOW}Step 7: Pushing to GitHub${NC}"
 # Check if we have any commits to push
 if git rev-parse --verify HEAD >/dev/null 2>&1; then
     # Attempt to set upstream and push
-    if git push -u origin "$BRANCH_NAME" 2>/dev/null; then
+    PUSH_OUTPUT=$(git push -u origin "$BRANCH_NAME" 2>&1)
+    if [ $? -eq 0 ]; then
         echo "✓ Successfully pushed to GitHub (origin/$BRANCH_NAME)"
         PUSH_SUCCESS=true
     else
-        echo -e "${YELLOW}⚠️  Push to GitHub failed - likely due to authentication${NC}"
+        echo -e "${YELLOW}⚠️  Push to GitHub failed - likely due to authentication or network issues${NC}"
         echo -e "${YELLOW}   This is normal if you need to set up authentication${NC}"
+        echo -e "${RED}Error details:${NC}"
+        echo "$PUSH_OUTPUT"
         PUSH_SUCCESS=false
     fi
 else
