@@ -25,9 +25,6 @@ NC='\033[0m' # No Color
 # Configuration variables - modify these as needed
 # REMOTE_REPO_URL can be set via environment variable or as the first command-line argument.
 DEFAULT_REMOTE_REPO_URL="https://github.com/hannesmitterer/euystacio_foundation_package.git"
-REMOTE_REPO_URL="${REMOTE_REPO_URL:-${1:-$DEFAULT_REMOTE_REPO_URL}}"
-COMMIT_MESSAGE="Initial commit: Euystacio Foundation & Sentimento Codex package"
-BRANCH_NAME="main"
 
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then
     echo -e "${YELLOW}Usage:${NC} $0 [REMOTE_REPO_URL]"
@@ -36,6 +33,10 @@ if [[ "$1" == "-h" || "$1" == "--help" ]]; then
     echo "  $DEFAULT_REMOTE_REPO_URL"
     exit 0
 fi
+
+REMOTE_REPO_URL="${REMOTE_REPO_URL:-${1:-$DEFAULT_REMOTE_REPO_URL}}"
+COMMIT_MESSAGE="Initial commit: Euystacio Foundation & Sentimento Codex package"
+BRANCH_NAME="main"
 
 echo -e "${BLUE}🚀 Starting Git Repository Initialization for Euystacio Foundation & Sentimento Codex${NC}"
 echo "============================================================================="
