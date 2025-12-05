@@ -123,8 +123,7 @@ echo -e "${YELLOW}Step 7: Pushing to GitHub${NC}"
 # Check if we have any commits to push
 if git rev-parse --verify HEAD >/dev/null 2>&1; then
     # Attempt to set upstream and push
-    PUSH_OUTPUT=$(git push -u origin "$BRANCH_NAME" 2>&1)
-    if [ $? -eq 0 ]; then
+    if PUSH_OUTPUT=$(git push -u origin "$BRANCH_NAME" 2>&1); then
         echo "✓ Successfully pushed to GitHub (origin/$BRANCH_NAME)"
         PUSH_SUCCESS=true
     else
