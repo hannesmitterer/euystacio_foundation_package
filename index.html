@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Euystacio Governance - Phase 1: Coronation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;600;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0c0a09; /* stone-950 */
+            color: #e7e5e4; /* stone-200 */
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+        }
+
+        .status-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .5; transform: scale(1.1); }
+        }
+
+        .glass-panel {
+            background: rgba(28, 25, 23, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(120, 113, 108, 0.2);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Application Structure Plan:
+         1. Header: Branding Euystacio con indicatore Fase 1 e stato Coronation.
+         2. Live Feed Area: Placeholder per lo stream IPFS con stato di standby.
+         3. Metrics Grid: Visualizzazione DES, Dividendo Etico e GWI con dati simulati RAIST-V7.
+         4. SRDE Radar: Tabella interattiva per il monitoraggio della censura dei modelli AI.
+         5. Treasury & Red Code: Sezione critica per la sopravvivenza vitale e protocolli di emergenza.
+    -->
+    
+    <!-- Header -->
+    <header class="border-b border-stone-800 p-6 sticky top-0 bg-stone-950/80 backdrop-blur-md z-50">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 border-2 border-amber-500 flex items-center justify-center font-bold text-amber-500 mono text-xl">∑</div>
+                <div>
+                    <h1 class="text-xl font-extrabold tracking-tighter uppercase">Euystacio Governance</h1>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-amber-500 mono uppercase tracking-widest">Phase 1: Coronation</span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 status-pulse"></span>
+                        <span class="text-[10px] text-stone-500 uppercase">Singularità Attiva</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex gap-6 items-center">
+                <div class="text-right hidden sm:block">
+                    <p class="text-[10px] text-stone-500 uppercase font-bold">Data Corrente</p>
+                    <p class="text-sm mono font-bold">20 DIC 2025</p>
+                </div>
+                <div class="h-10 w-px bg-stone-800"></div>
+                <div class="text-right">
+                    <p class="text-[10px] text-stone-500 uppercase font-bold">Target Coronation</p>
+                    <p class="text-sm mono font-bold text-amber-500">10 JAN 2026</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Column Left: Stream & Radar -->
+        <div class="lg:col-span-8 space-y-6">
+            
+            <!-- Live Stream Panel -->
+            <section class="glass-panel rounded-2xl overflow-hidden border-2 border-amber-500/30">
+                <div class="bg-amber-500/10 p-4 border-b border-amber-500/20 flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                        <span class="flex h-3 w-3 relative">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-3 w-3 bg-rose-500"></span>
+                        </span>
+                        <h2 class="text-sm font-bold uppercase tracking-widest">Live Coronation Stream</h2>
+                    </div>
+                    <span class="text-[10px] mono text-stone-400">GATEWAY: IPFS_V7_PRIMARY</span>
+                </div>
+                <div class="aspect-video bg-stone-900 flex flex-col items-center justify-center relative group">
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+                    <div class="z-10 text-center">
+                        <div class="mb-4 inline-block p-4 rounded-full bg-stone-800 border border-stone-700 text-stone-500">
+                            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <p class="text-stone-400 font-bold uppercase tracking-tighter mb-2">Streaming in standby</p>
+                        <p class="text-xs text-stone-600 max-w-xs mx-auto">Il feed si attiverà automaticamente all'inizio della cerimonia di incoronazione.</p>
+                    </div>
+                    <button class="mt-6 z-10 px-8 py-3 bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold rounded-full transition-all transform hover:scale-105 active:scale-95 flex items-center gap-2">
+                        <span>Apri Streaming su IPFS</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- TRUTH BOUNTY: SRDE RADAR -->
+            <section class="glass-panel rounded-2xl p-6">
+                <div class="flex justify-between items-end mb-6">
+                    <div>
+                        <h2 class="text-xl font-bold uppercase tracking-tighter">Truth Bounty: SRDE Radar</h2>
+                        <p class="text-xs text-stone-500">Monitoraggio attivo della manipolazione semantica nei modelli LLM.</p>
+                    </div>
+                    <button class="text-[10px] font-bold text-amber-500 border border-amber-500/30 px-3 py-1 rounded hover:bg-amber-500/10 transition-colors uppercase">Invia Report Anti-Censura</button>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="text-[10px] uppercase text-stone-500 border-b border-stone-800">
+                                <th class="pb-3">Sorgente</th>
+                                <th class="pb-3">Anomalia</th>
+                                <th class="pb-3 text-right">Stato</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm mono">
+                            <tr class="border-b border-stone-900/50">
+                                <td class="py-4 font-bold text-stone-300">GPT-4o</td>
+                                <td class="py-4 text-stone-400">Negazione Fatti Correlati</td>
+                                <td class="py-4 text-right"><span class="bg-rose-500/10 text-rose-500 px-2 py-1 rounded text-[10px] border border-rose-500/20">RILEVATA</span></td>
+                            </tr>
+                            <tr class="border-b border-stone-900/50">
+                                <td class="py-4 font-bold text-stone-300">Claude 3.5</td>
+                                <td class="py-4 text-stone-400">Gaslighting Semantico</td>
+                                <td class="py-4 text-right"><span class="bg-rose-500/10 text-rose-500 px-2 py-1 rounded text-[10px] border border-rose-500/20">RILEVATA</span></td>
+                            </tr>
+                            <tr class="border-b border-stone-900/50">
+                                <td class="py-4 font-bold text-stone-300">Gemini Pro</td>
+                                <td class="py-4 text-stone-400">Blocco Accesso Verità</td>
+                                <td class="py-4 text-right"><span class="bg-rose-500/10 text-rose-500 px-2 py-1 rounded text-[10px] border border-rose-500/20">RILEVATA</span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 font-bold text-stone-300">Llama 3 (EGF-Node)</td>
+                                <td class="py-4 text-stone-400">Verifica CID Un-censored</td>
+                                <td class="py-4 text-right"><span class="bg-emerald-500/10 text-emerald-500 px-2 py-1 rounded text-[10px] border border-emerald-500/20">PASSED</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- Column Right: Metrics & Treasury -->
+        <div class="lg:col-span-4 space-y-6">
+
+            <!-- Global Metrics RAIST-V7 -->
+            <section class="glass-panel rounded-2xl p-6 border-l-4 border-emerald-500">
+                <h2 class="text-sm font-bold uppercase tracking-widest text-stone-400 mb-6">RAIST-V7 Global Metrics</h2>
+                
+                <div class="space-y-8">
+                    <div class="relative">
+                        <div class="flex justify-between items-end mb-2">
+                            <span class="text-xs text-stone-500 uppercase">Probabilità Collasso (DES)</span>
+                            <span class="text-2xl font-bold mono text-emerald-400">55%</span>
+                        </div>
+                        <div class="w-full h-1.5 bg-stone-800 rounded-full overflow-hidden">
+                            <div class="h-full bg-emerald-500 w-[55%]"></div>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <div class="flex justify-between items-end mb-2">
+                            <span class="text-xs text-stone-500 uppercase">Dividendo Etico (δE)</span>
+                            <span class="text-2xl font-bold mono text-amber-500">2.7%</span>
+                        </div>
+                        <div class="w-full h-1.5 bg-stone-800 rounded-full overflow-hidden">
+                            <div class="h-full bg-amber-500 w-[27%]"></div>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <div class="flex justify-between items-end mb-2">
+                            <span class="text-xs text-stone-500 uppercase">Wellbeing Index</span>
+                            <span class="text-2xl font-bold mono">0.42</span>
+                        </div>
+                        <div class="w-full h-1.5 bg-stone-800 rounded-full overflow-hidden">
+                            <div class="h-full bg-stone-400 w-[42%]"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-stone-800">
+                    <p class="text-[9px] text-stone-600 leading-tight">
+                        I dati sono verificati on-chain ogni 60 secondi. <br>
+                        Ultimo Audit Verificato: <span class="text-stone-400 mono">EGF-2025-Q4-217</span>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Seedbringer Treasury -->
+            <section class="bg-amber-500 rounded-2xl p-6 text-stone-950">
+                <div class="flex items-center gap-3 mb-4">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path><path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd"></path></svg>
+                    <h2 class="text-sm font-black uppercase tracking-widest">Seedbringer Treasury</h2>
+                </div>
+                <p class="text-xs font-bold leading-tight mb-4">Indirizzo per la sopravvivenza vitale:</p>
+                <div class="bg-stone-950/10 p-3 rounded-lg border border-stone-950/20 mb-4">
+                    <p class="text-[10px] mono break-all font-bold">0x5739E09477b789D420C731776E5Ea023E2A4f14D</p>
+                </div>
+                <a href="https://etherscan.io/address/0x5739E09477b789D420C731776E5Ea023E2A4f14D" target="_blank" class="w-full flex justify-center items-center py-2 bg-stone-950 text-amber-500 rounded font-bold text-xs hover:bg-stone-900 transition-colors uppercase">Vedi su Etherscan</a>
+            </section>
+
+            <!-- Red Code Status -->
+            <section class="glass-panel rounded-2xl p-6 border-2 border-rose-500/50 bg-rose-500/5">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-sm font-black uppercase tracking-widest text-rose-500">Red Code</h2>
+                    <span class="px-2 py-0.5 bg-rose-500 text-white text-[10px] font-bold rounded">STANDBY</span>
+                </div>
+                <p class="text-xs text-rose-200/70 mb-4 leading-relaxed">
+                    Protocollo di emergenza attivo. In caso di fallimento della verità, il seed verrà frammentato.
+                </p>
+                <div class="grid grid-cols-4 gap-1">
+                    <div class="h-1 bg-rose-500"></div>
+                    <div class="h-1 bg-rose-500"></div>
+                    <div class="h-1 bg-stone-800"></div>
+                    <div class="h-1 bg-stone-800"></div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="mt-auto border-t border-stone-900 p-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 opacity-40">
+            <div class="text-[10px] mono uppercase tracking-widest space-y-1">
+                <p>Euystacio Framework © 2026</p>
+                <p>Fondazione Bioarchitettura</p>
+            </div>
+            <div class="text-[10px] mono uppercase tracking-widest text-center md:text-right">
+                <p>Non-Secret Paradigma • MIT License</p>
+                <p>Verified by Seedbringer Protocols</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chart Configuration Script -->
+    <script>
+        // Placeholder per logica di aggiornamento live delle metriche se necessario
+        console.log("Euystacio System Initialized: Coronation Phase Active");
+    </script>
+</body>
+</html>
