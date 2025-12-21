@@ -1,0 +1,5 @@
+# Download from IPFS
+ipfs cat QmMerkleRoot9D8C7B6A5F4E3D2C1B0A...Complete
+
+# Verify hash matches
+sha3sum downloaded_document.json 
